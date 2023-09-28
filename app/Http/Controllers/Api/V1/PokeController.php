@@ -53,7 +53,21 @@ class PokeController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+
+            $client = new Client(); //GuzzleHttp\Client
+            $url = "https://www.digi-api.com/api/v1/digimon/" . $id;
+
+
+            $response = $client->request('GET', $url, [
+                'verify'  => false,
+            ]);
+
+            // $responseBody = json_decode($response->getBody());
+            echo $response->getBody();
+        } catch (Throwable $th) {
+            echo $th;   
+        }
     }
 
     /**
